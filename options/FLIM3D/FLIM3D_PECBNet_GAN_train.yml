@@ -1,0 +1,158 @@
+# general settings
+name: FLIM3D_PETC_GAN
+model_type: VideoRecurrentGANModel
+scale: 1
+num_gpu: 1
+manual_seed: 0
+
+# dataset and data loader settings
+datasets:
+  train:
+    name: FLIM_3D
+    type: train3DDataset
+    dataroot_gt: datasets/ben_frames/splitting_4/trainB
+    dataroot_lq: datasets/ben_frames/splitting_4/trainA
+    meta_info_file: options/FLIM3D/meta_info/FLIM_meta_info_ben4.txt
+    test_mode: False
+    io_backend:
+      type: disk
+
+    num_frame: 100
+    interval_list: [1]
+    random_reverse: false
+    use_hflip: true
+    use_rot: true
+    gray: true # set to true if num_in_ch (network_g) = 1
+    img_ext: tif
+
+    # data loader
+    use_shuffle: true
+    num_worker_per_gpu: 2
+    batch_size_per_gpu: 1
+    dataset_enlarge_ratio: 100
+    prefetch_mode: ~
+
+  val:
+    name: FLIM_3D
+    type: VideoRecurrentTestDataset
+    dataroot_gt: datasets/ben_frames/splitting_4/valB
+    dataroot_lq: datasets/ben_frames/splitting_4/valA
+    cache_data: true
+    io_backend:
+      type: disk
+
+    num_frame: -1  # not needed
+    gray: true # set to true if num_in_ch (network_g) = 1
+
+# network structures
+network_g:
+  type: PECBNet
+  num_feat: 64
+  num_block: 8
+  num_in_ch: 1
+  upscale: 1
+  keyframes: [8, 10, 12, 16]
+
+
+network_d:
+  type: VGGStyleDiscriminator
+  num_in_ch: 1
+  num_feat: 64
+  input_size: 128
+
+
+# path
+path:
+  pretrain_network_g: ~
+  strict_load_g: true
+  resume_state: ~
+
+# training settings
+train:
+  ema_decay: 0.999
+  optim_g:
+    type: Adam
+    lr: !!float 2e-4
+    weight_decay: 0
+    betas: [0.9, 0.99]
+
+  optim_d:
+    type: Adam
+    lr: !!float 1e-4
+    weight_decay: 0
+    betas: [0.9, 0.99]
+
+
+  scheduler:
+    type: CosineAnnealingRestartLR
+    periods: [300000]
+    restart_weights: [1]
+    eta_min: !!float 1e-7
+
+  total_iter: 100000
+  warmup_iter: -1  # no warm up
+  fix_flow: 5000
+#  flow_lr_mul: 0.125
+
+  # losses
+  # losses
+  pixel_opt:
+    type: L1Loss
+    loss_weight: 1.0
+    reduction: mean
+  # perceptual loss (content and style losses)
+  perceptual_opt:
+    type: PerceptualLoss
+    layer_weights:
+      # before relu
+      'conv1_2': 0.1
+      'conv2_2': 0.1
+      'conv3_4': 1
+      'conv4_4': 1
+      'conv5_4': 1
+    vgg_type: vgg19
+    use_input_norm: true
+    perceptual_weight: !!float 1.0
+    style_weight: 0
+    range_norm: false
+    criterion: l1
+  # gan loss
+  gan_opt:
+    type: GANLoss
+    gan_type: vanilla
+    real_label_val: 1.0
+    fake_label_val: 0.0
+    loss_weight: !!float 1e-1
+
+  net_d_iters: 1
+  net_d_init_iters: 0
+
+# validation settings
+val:
+  val_freq: !!float 1e3
+  save_img: false
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+
+
+# logging settings
+logger:
+  print_freq: 100
+  save_checkpoint_freq: !!float 1e3
+  use_tb_logger: true
+  wandb:
+    project: ~
+    resume_id: ~
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500
+
+find_unused_parameters: true

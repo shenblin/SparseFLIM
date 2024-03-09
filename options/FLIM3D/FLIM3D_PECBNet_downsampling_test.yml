@@ -1,0 +1,64 @@
+#name: FLIM3D_PECBNet_downsampling_2
+name: FLIM3D_PECBNet_downsampling_3
+#name: FLIM3D_PECBNet_downsampling_4
+model_type: VideoRecurrentModel
+#scale: 2
+scale: 3
+#scale: 4
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 0
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: FLIM_skin
+    type: VideoRecurrentTestDataset
+#    dataroot_gt: datasets/ben_frames/downsampling_test/testB
+#    dataroot_lq: datasets/ben_frames/downsampling_test/scale_2/testA
+#    dataroot_lq: datasets/ben_frames/downsampling_test/scale_4/testA
+
+    dataroot_gt: datasets/ben_frames/downsampling_test/scale_3/testB
+    dataroot_lq: datasets/ben_frames/downsampling_test/scale_3/testA
+
+    cache_data: true
+    io_backend:
+      type: disk
+    gray: true # set to true if num_in_ch (network_g) = 1
+
+# network structures
+network_g:
+  type: PECBNet
+  num_block: 8
+  num_in_ch: 1
+
+#  upscale: 2
+#  num_feat: 64
+#  keyframes: [8, 10]
+
+  upscale: 3
+  num_feat: 72
+  keyframes: [8, 10, 12, 16]
+
+#  upscale: 4
+#  num_feat: 64
+#  keyframes: [8, 10, 12, 16]
+
+
+path:
+#  pretrain_network_g: experiments/FLIM3D_PECBNet_downsampling/FLIM3D_PECBNet_downsampling_2_[8, 10]/models/net_g_21000.pth
+  pretrain_network_g: experiments/FLIM3D_PECBNet_downsampling/FLIM3D_PECBNet_downsampling_3/models/net_g_19000.pth
+#  pretrain_network_g: experiments/FLIM3D_PECBNet_downsampling/FLIM3D_PECBNet_downsampling_4/models/net_g_37000.pth
+  strict_load_g: true
+
+
+val:
+  save_img: true
+  suffix: ~
+
+  metrics:
+    psnr:
+      type: calculate_psnr
+      crop_border: 0
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+

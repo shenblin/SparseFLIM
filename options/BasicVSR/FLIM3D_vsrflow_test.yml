@@ -1,0 +1,44 @@
+name: FLIM3D_vsrflow
+model_type: VideoRecurrentModel
+scale: 1
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 0
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: itr_22000
+    type: VideoRecurrentTestDataset
+    dataroot_gt: datasets/ben_frames/testB
+    dataroot_lq: datasets/ben_frames/testA
+    cache_data: True
+    io_backend:
+      type: disk
+    num_frame: -1  # not needed
+    gray: true # set to true if num_in_ch (network_g) = 1
+
+# network structures
+network_g:
+  type: FLIM3D_vsrflow
+  num_feat: 64
+  num_block: 8
+  num_in_ch: 1
+  upscale: 1
+
+# path
+path:
+  pretrain_network_g: experiments/FLIM3D_vsrflow/models/net_g_22000.pth
+  strict_load_g: true
+
+# validation settings
+val:
+  save_img: true
+  suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+
