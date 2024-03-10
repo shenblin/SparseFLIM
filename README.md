@@ -25,9 +25,9 @@ Fluorescence lifetime imaging microscopy (FLIM) provides quantitative readouts o
 <p align="center">
   <img src="assets/Fig_1.gif">
 </p>
+
 ## Network
 📕 Dependencies and Installation
-
 
 Python 3.9 (Recommend to use [Anaconda](https://www.anaconda.com/download/#linux))
 - NVIDIA GPU + [CUDA](https://developer.nvidia.com/cuda-downloads)
