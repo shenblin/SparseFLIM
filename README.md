@@ -28,10 +28,23 @@ Fluorescence lifetime imaging microscopy (FLIM) provides quantitative readouts o
 ## Network
 📕 Dependencies and Installation
 
-Python >= 3.7 (Recommend to use [Anaconda](https://www.anaconda.com/download/#linux) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html))
-- [PyTorch >= 1.3](https://pytorch.org/)
+Python 3.9 (Recommend to use [Anaconda](https://www.anaconda.com/download/#linux))
 - NVIDIA GPU + [CUDA](https://developer.nvidia.com/cuda-downloads)
-   
+
+1. Clone repo
+
+    ```bash
+    git clone https://github.com/shenblin/DeepBID.git
+    ```
+
+2. Install dependent packages
+
+    ```bash
+    pip install -r requirements.txt
+    pip3 install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+    python setup.py develop
+    ```
+    
 ## Dataset download
 
 Please refer to [DataPreparation](datasets/Data_Download.md). It mainly includes experimental data for training and testing.
