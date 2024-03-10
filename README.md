@@ -1,9 +1,5 @@
 #  SparseFLIM: Overcoming Photon and Spatiotemporal Sparsity in Fluorescence Lifetime Imaging
 
-<p align="center">
-  <img src="assets/title.png">
-</p>
-
 ### [Paper](assets/Manuscript.pdf)
 This project hosts the scripts for training and testing SparseFLIM,an intelligent paradigm for achieving high-fidelity FLIM reconstruction from sparse photon measurements, as presented in our paper.
 
@@ -24,9 +20,11 @@ Fluorescence lifetime imaging microscopy (FLIM) provides quantitative readouts o
 ## General principle and validation of SparseFLIM 
 
 <p align="center">
-  <img src="assets/Figure_1.tif">
+  <img src="assets/Figure_1.jpg">
 </p>
-
+<p align="center">
+  <img src="assets/Fig_1.gif">
+</p>
 ## Network
 📕 Dependencies and Installation
 
@@ -78,7 +76,7 @@ ________________________________________________________________________________
 
 
 <p align="center">
-  <img src="assets/Figure_2.tif">
+  <img src="assets/Figure_2.jpg">
 </p>
 
 **Fig. 2  Network enhance label-free FLIM data of human skin tissue.**
