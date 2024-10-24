@@ -1,0 +1,47 @@
+name: FLIM3D_PECBNet_stack3D
+model_type: StackRecurrentModel
+scale: 1
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 0
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: FLIM_skin
+    type: StackTestDataset
+    dataroot_gt: datasets/skin_stack/testB
+    dataroot_lq: datasets/skin_stack/testA
+    cache_data: true
+
+
+# network structures
+network_g:
+  type: PECBNet
+  num_feat: 64
+  num_block: 8
+  num_in_ch: 1
+  upscale: 1
+#  keyframes: [8, 10, 12, 16, 20]
+  keyframes: [8, 10, 12, 16]
+#  keyframes: [8, 10, 16]
+#  keyframes: [8, 10]
+#  keyframes: [10]
+#  keyframes: []
+
+
+path:
+  pretrain_network_g: experiments/FLIM3D_skin_stack3D/FLIM3D_PECBNet_stack3D_[8, 10, 12, 16]/models/net_g_24000.pth
+  strict_load_g: true
+
+
+val:
+  save_img: true
+  suffix: ~
+
+  metrics:
+    psnr:
+      type: calculate_psnr
+      crop_border: 0
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+
