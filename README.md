@@ -1,7 +1,7 @@
 #  SparseFLIM: Overcoming Photon and Spatiotemporal Sparsity in Fluorescence Lifetime Imaging
 
 ### [Paper](assets/Manuscript.pdf)
-This project hosts the scripts for training and testing SparseFLIM, an intelligent paradigm for achieving high-fidelity FLIM reconstruction from sparse photon measurements, as presented in our paper.
+This project hosts the scripts for training and testing SparseFLIM, an intelligent paradigm for achieving high-fidelity FLIM reconstruction from sparse photon measurements, as presented in our paper: Shen, B., Lu, Y., Guo, F. et al. [Overcoming photon and spatiotemporal sparsity in fluorescence lifetime imaging with SparseFLIM](https://doi.org/10.1038/s42003-024-07080-x). Commun Biol 7, 1359 (2024). 
 
 ## Contents
 
@@ -108,7 +108,7 @@ More details about **license** and **acknowledgement** are in [LICENSE](license/
 
 🌏 If you find this work useful in your research, please consider citing the paper:
 
-B. Shen, et al.
+Shen, B., Lu, Y., Guo, F. et al. [Overcoming photon and spatiotemporal sparsity in fluorescence lifetime imaging with SparseFLIM](https://doi.org/10.1038/s42003-024-07080-x). Commun Biol 7, 1359 (2024). 
 
 📧 Contact
 
