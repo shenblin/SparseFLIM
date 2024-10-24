@@ -20,10 +20,10 @@ Fluorescence lifetime imaging microscopy (FLIM) provides quantitative readouts o
 ## General principle and validation of SparseFLIM 
 
 <p align="center">
-  <img src="assets/Figure_1.jpg">
+  <img src="assets/Figure 1.jpg">
 </p>
 <p align="center">
-  <img src="assets/Fig_1.gif">
+  <img src="assets/Movie 1.gif">
 </p>
 
 ## Network
@@ -90,7 +90,7 @@ ________________________________________________________________________________
 
 
 <p align="center">
-  <img src="assets/Figure_2.jpg">
+  <img src="assets/Figure 2.jpg">
 </p>
 
 **Fig. 2  Network enhance label-free FLIM data of human skin tissue.**
