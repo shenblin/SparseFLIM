@@ -2,7 +2,9 @@
 
 ### [Paper](assets/Manuscript.pdf)
 This project hosts the scripts for training and testing SparseFLIM, an intelligent paradigm for achieving high-fidelity FLIM reconstruction from sparse photon measurements, as presented in our paper: Shen, B., Lu, Y., Guo, F. et al. [Overcoming photon and spatiotemporal sparsity in fluorescence lifetime imaging with SparseFLIM](https://doi.org/10.1038/s42003-024-07080-x). Commun Biol 7, 1359 (2024). 
-Updated: Added the missing file: asicsr/archs/edvr_arch.py to the repository. You should be able to access it and incorporate it into your implementation.
+
+## Updated
+Added the missing file: asicsr/archs/edvr_arch.py to the repository. You should be able to access it and incorporate it into your implementation.
 
 ## Contents
 
