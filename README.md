@@ -38,7 +38,7 @@ Python 3.9 (Recommend to use [Anaconda](https://www.anaconda.com/download/#linux
 1. Clone repo
 
     ```bash
-    git clone https://github.com/shenblin/DeepBID.git
+    git clone https://github.com/shenblin/SparseFLIM.git
     ```
 
 2. Install dependent packages
